@@ -14,7 +14,7 @@ test("AGREGAR E INSCRIBIR UNITARIA", async ({ page }) => {
     page.getByRole("button", { name: /ingresar/i }).click(),
   ]);
 
-  // ✅ aumentar espera SOLO en la última parte
+  // ✅ aumentar espera SOLO en la última parteeeeee 2
 
   await page.getByRole("button", { name: "Pagos y Transferencias" }).click();
   await page.getByRole("button", { name: " Transferencias Moneda" }).click();
