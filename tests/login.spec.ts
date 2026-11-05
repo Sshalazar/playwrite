@@ -6,7 +6,7 @@ import { LoginPage } from "../pages/LoginPage";
 
 test.setTimeout(120000);
 
-test("Agregar e inscribir masivo", async ({ page }) => {
+test("Igresar a banconexion", async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.navegar(process.env.BASE_URL!);

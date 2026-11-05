@@ -1,0 +1,130 @@
+
+
+## -----------------------------Ejecutar:
+
+# Ejecuta todos los tests
+npx playwright test
+
+# Ejecuta un archivo específico
+npx playwright test login.spec.ts
+
+# Ejecuta tests por nombre (grep)
+npx playwright test -g "Login exitoso"
+
+# Ejecuta con interfaz UI (ideal para debugging)
+npx playwright test --ui
+
+# Ejecuta mostrando el navegador
+npx playwright test --headed
+
+### --------------------------- Debug y Análisis
+
+# Ejecutar en modo debug paso a paso
+npx playwright test --debug
+
+# Ejecutar con trazas habilitadas
+npx playwright test --trace on
+
+# Abrir archivo de trace generado
+npx playwright show-trace trace.zip
+
+#### -----------------Generación automática de código
+
+# Genera código automático mientras navegas
+npx playwright codegen https://tu-url.com
+
+
+
+#### ----------------- Reportes
+# Abre el reporte HTML de ejecución
+npx playwright show-report
+
+#### ----------------- Ejecutar en navegadores específicos
+
+# Ejecutar en Chromium
+npx playwright test --project=chromium
+--- npx playwright test tests/home.spec.ts --project=chromium --headed
+
+# Ejecutar en Firefox
+npx playwright test --project=firefox
+
+# Ejecutar en WebKit (Safari)
+npx playwright test --project=webkit
+
+#### ----------------- Control de tiempo y ejecución
+
+
+# Aumentar timeout global (ej: 60 segundos)
+npx playwright test --timeout=60000
+
+# Ejecutar con un solo worker (secuencial)
+npx playwright test --workers=1
+
+#### ----------------- Filtrado y organización
+
+# Ejecutar tests de una carpeta específica
+npx playwright test tests/login/
+
+# Ejecutar tests específicos por patrón
+npx playwright test *login*
+
+
+# Ejecutar tests de una carpeta específica
+npx playwright test tests/login/
+
+# Ejecutar tests específicos por patrón
+npx playwright test *login*
+
+#### ----------------- Comando recomendado para troubleshooting 
+# Debug completo con mayor tiempo y navegador visible
+npx playwright test --debug --headed --timeout=120000
+
+## Screenshots automáticos
+# Captura screenshots solo en fallos
+npx playwright test --screenshot=only-on-failure
+
+Video de ejecución
+# Graba video de los tests
+npx playwright test --video=on
+
+Logs detallados
+# Mostrar más detalle en consola
+DEBUG=pw:api npx playwright test
+
+Slow motion (para ver el flujo)
+# Ejecuta más lento
+npx playwright test --headed --slow-mo=1000
+
+
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://login.qa.bancochile.cl/bancochile-web/empresa/login/index.html#/login');
+  await page.getByRole('textbox', { name: 'RUT RUT' }).click();
+  await page.getByRole('textbox', { name: 'RUT RUT' }).fill('13.164.416-7');
+  await page.getByRole('textbox', { name: 'Contraseña Contraseña' }).click();
+  await page.getByRole('textbox', { name: 'Contraseña Contraseña' }).press('CapsLock');
+  await page.getByRole('textbox', { name: 'Contraseña Contraseña' }).fill('Banco001');
+  await page.getByRole('button', { name: 'Ingresar' }).click();
+  await page.goto('https://portalempresas.qa.bancochile.cl/mibancochile-web/front/empresa/index.html#/home');
+  await page.getByRole('button', { name: 'Pagos y Transferencias' }).click();
+  await page.getByRole('button', { name: ' Transferencias Moneda' }).click();
+  await page.getByRole('link', { name: 'Agregar e Inscribir', exact: true }).click();
+  await page.locator('.btn-chevron').first().click();
+  await page.locator('div').filter({ hasText: 'Cuenta Corriente M/E USD 00-' }).nth(5).click();
+  await page.locator('.mat-icon.notranslate.material-icons.mat-icon-no-color.ng-tns-c94-3 > .btn-chevron').click();
+  await page.getByRole('combobox', { name: 'Beneficiario' }).click();
+  await page.getByRole('combobox', { name: 'Beneficiario' }).fill('quin');
+  await page.getByText('Quintay sa').click();
+  await page.getByRole('textbox', { name: 'Monto' }).click();
+  await page.getByRole('textbox', { name: 'Monto' }).fill('34');
+  await page.getByRole('button', { name: 'AGREGAR E INSCRIBIR' }).click();
+  await page.locator('section:nth-child(2) > div > .col-12.d-flex').click();
+  await page.getByRole('textbox', { name: 'DigiPass Digito 0' }).fill('8');
+  await page.getByRole('textbox', { name: 'DigiPass Digito 1' }).fill('8');
+  await page.getByRole('textbox', { name: 'DigiPass Digito 2' }).fill('8');
+  await page.getByRole('textbox', { name: 'DigiPass Digito 3' }).fill('8');
+  await page.getByRole('textbox', { name: 'DigiPass Digito 4' }).fill('8');
+  await page.getByRole('textbox', { name: 'DigiPass Digito 5' }).fill('8');
+  await page.getByRole('button', { name: 'Inscribir operación' }).click();
+});

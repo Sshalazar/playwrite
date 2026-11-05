@@ -8,7 +8,7 @@ test.setTimeout(300000);
 test("Agregar e inscribir masivo", async ({ page }) => {
   const otp = process.env.DIGIPASS ?? "";
 
-  await page.goto(process.env.BASE_URL!);
+await page.goto(process.env.BASE_URL);
 
   // Login
   await page.getByRole("textbox", { name: "RUT RUT" }).fill(process.env.RUT!);
